@@ -7,7 +7,7 @@
 
 void viewList();
 
-void addTask(std::string task);
+void addTask(const std::string &task);
 
 void removeTask(int index);
 

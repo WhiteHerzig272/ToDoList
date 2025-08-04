@@ -20,7 +20,7 @@ void viewList() {
     in.close();
 }
 
-void addTask(std::string task) {
+void addTask(const std::string &task) {
     std::ofstream outFile("../tasks.txt", std::ios::app);
     if (!outFile.is_open()) {
         std::cout << "Error! Writing to file.\n";
@@ -39,6 +39,7 @@ void removeTask(int index) {
     while (std::getline(inFile, line)) {
         lines.push_back(line);
     }
+    inFile.close();
 
     if (index + 1 < 0 || index + 1 > lines.size()) {
         std::cout << "Error! Invalid task number.\n";
