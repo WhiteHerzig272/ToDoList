@@ -12,3 +12,5 @@ void addTask(const std::string &task);
 void removeTask(int index);
 
 void deleteAllTasks();
+
+void ensureTasksFileExists();

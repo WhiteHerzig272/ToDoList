@@ -4,9 +4,11 @@
 #include <limits> // Для numeric_limits
 #include "file_io.h"
 
+
 int main() {
     setlocale(LC_ALL, "ru_Ru.UTF-8");
 
+    ensureTasksFileExists();
 
     while (true) {
         int action;
@@ -32,6 +34,7 @@ int main() {
 
         std::string task;
         int number;
+        std::string isSure;
 
         switch (action) {
             case 1:
@@ -56,7 +59,13 @@ int main() {
 
                     break;
                 }
-                removeTask(number - 1);
+                std::cout << "Are you sure (1 - true, 0 - false): ";
+                std::cin >> isSure;
+                if (isSure == "true" || isSure == "1") {
+                    removeTask(number - 1);
+                } else {
+                    std::cout << "OK" << std::endl;
+                }
                 break;
             case 3:
                 viewList();

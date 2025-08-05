@@ -2,11 +2,30 @@
 #include <fstream>
 #include "file_io.h"
 #include <vector>
+#include <limits>
+#include <filesystem>
+
+void ensureTasksFileExists() {
+    const std::string filename = "tasks.txt";
+
+    // Проверяем существование файла
+    if (!std::filesystem::exists(filename)) {
+        // Создаем пустой файл
+        std::ofstream file(filename);
+        if (file.is_open()) {
+            file.close();
+        } else {
+            std::cerr << "Ошибка: не удалось создать файл " << filename << "\n";
+        }
+    }
+}
 
 void viewList() {
     std::string line;
 
-    std::ifstream in("../tasks.txt");
+    std::string path = std::filesystem::current_path().string();
+
+    std::ifstream in("tasks.txt");
     if (in.is_open()) {
         int counter = 0;
         while (std::getline(in, line)) { // Пока getline успешно читает сторку, будет работать цикл
@@ -16,12 +35,11 @@ void viewList() {
     } else {
         std::cout << "Error! \"tasks.txt\" not found\n";
     }
-
     in.close();
 }
 
 void addTask(const std::string &task) {
-    std::ofstream outFile("../tasks.txt", std::ios::app);
+    std::ofstream outFile("tasks.txt", std::ios::app);
     if (!outFile.is_open()) {
         std::cout << "Error! Writing to file.\n";
         return;
@@ -35,7 +53,7 @@ void removeTask(int index) {
     std::string line;
     std::vector<std::string> lines;
 
-    std::ifstream inFile("../tasks.txt");
+    std::ifstream inFile("tasks.txt");
     while (std::getline(inFile, line)) {
         lines.push_back(line);
     }
@@ -48,7 +66,7 @@ void removeTask(int index) {
 
     lines.erase(lines.begin() + index);
 
-    std::ofstream outFile("../tasks.txt");
+    std::ofstream outFile("tasks.txt");
     if (!outFile.is_open()) {
         std::cout << "Error! Writing to file.\n";
         return;
@@ -60,7 +78,7 @@ void removeTask(int index) {
 }
 
 void deleteAllTasks() {
-    std::ofstream outFile("../tasks.txt", std::ios::trunc);
+    std::ofstream outFile("tasks.txt", std::ios::trunc);
     if (!outFile.is_open()) {
         std::cout << "Error! Writing to file.\n";
         return;
