@@ -1,3 +1,0 @@
-D:/C++/ToDoList/cmake-build-debug/CMakeFiles/ToDoList.dir
-D:/C++/ToDoList/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/C++/ToDoList/cmake-build-debug/CMakeFiles/rebuild_cache.dir
