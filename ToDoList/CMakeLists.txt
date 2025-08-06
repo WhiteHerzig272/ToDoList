@@ -16,6 +16,6 @@ if (WIN32)
     endif()
 endif()
 
-add_executable(ToDoList main.cpp
-        file_io.cpp
-        file_io.h)
+add_executable(ToDoList src/main.cpp
+        src/file_io.cpp
+        include/file_io.h)
